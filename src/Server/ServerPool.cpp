@@ -116,7 +116,7 @@ void ServerPool::ServicePoll() {
                             break;
                         }
 
-                        if (event.packet->dataLength < sizeof(IPacketType::m_packetType) + 1 ||
+                        if (event.packet->dataLength < 4 + 1 ||
                             event.packet->dataLength > 0x400) {
                             Logger::Print(WARNING, "Invalid packet size: {}", event.packet->dataLength);
                             enet_packet_destroy(event.packet);
@@ -131,8 +131,8 @@ void ServerPool::ServicePoll() {
                             case NET_MESSAGE_GENERIC_TEXT:
                             case NET_MESSAGE_GAME_MESSAGE: {
                                 auto data = this->DataToString(
-                                    event.packet->data + sizeof(IPacketType::m_packetType),
-                                    event.packet->dataLength - sizeof(IPacketType::m_packetType)
+                                    event.packet->data + 4,
+                                    event.packet->dataLength - 4
                                 );
                                 Logger::Print(DEBUG, "Got message: {}", data);
 
@@ -157,8 +157,8 @@ void ServerPool::ServicePoll() {
                             case NET_MESSAGE_GAME_PACKET: {
                                 Logger::Print(INFO, "Received packet type: Game Packet");
                                 auto* tankPacket = this->DataToTankPacket(
-                                    event.packet->data + sizeof(IPacketType::m_packetType),
-                                    event.packet->dataLength - sizeof(IPacketType::m_packetType)
+                                    event.packet->data + 4,
+                                    event.packet->dataLength - 4)
                                 );
                                 if (tankPacket) {
                                     Logger::Print(DEBUG, "Processing tank packet type: {}", static_cast<int>(tankPacket->m_type));

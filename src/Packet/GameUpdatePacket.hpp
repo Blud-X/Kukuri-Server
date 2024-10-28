@@ -182,6 +182,7 @@ struct TankPacketData {
         uint32_t m_particleSizeALt;
     };
     uint32_t m_dataLength = 0;
+    uint8_t* m_data;
     /*
     void Pack(BinaryWriter& buffer) {
         buffer.Write<uint8_t>(m_type);

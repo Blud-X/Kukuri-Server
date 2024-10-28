@@ -48,7 +48,8 @@ else ()
             fmt/10.2.1
             magic_enum/0.9.6
             mariadb-connector-c/3.3.8
-            openssl/3.0.5
+            openssl/3.2.2
+            libcurl/8.10.1
 	    sqlpp11/0.64
             date/3.0.1
             cpp-httplib/0.18.1

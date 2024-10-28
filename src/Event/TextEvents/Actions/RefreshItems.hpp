@@ -11,7 +11,7 @@ ACTION_EVENT("refresh_item_data", UpdatingItemsDat) {
     if (!pAvatar) return;
 
     // Send message that updating
-    VarList::OnConsoleMessage(pAvatar->Get(), "`4Updating item data...``");
+    VarList::OnConsoleMessage(pAvatar->Get(), "Updating item data...``");
 
     auto packet = SUpdateItemsPacket(GetItemManager()->GetItemsData());
     ENetWrapper::SendPacket(pAvatar->Get(), packet);
