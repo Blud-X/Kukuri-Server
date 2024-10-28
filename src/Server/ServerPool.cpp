@@ -141,7 +141,6 @@ void ServerPool::ServicePoll() {
 
                                     // Send OnSuperMain
                                     VarList::OnSuperMainStartAcceptLogon(event.peer, GetItemManager()->GetItemsDatHash());
-                                    Logger::Print(DEBUG, "Sent OnSuperMain");
                                 }
                                 else {
                                     GetEventPool()->AddQueue(

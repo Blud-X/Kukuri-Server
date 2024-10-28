@@ -52,8 +52,6 @@ void Player::OnConnect() {
     
     auto packet = SLoginInformationRequestPacket();
     ENetWrapper::SendPacket(this->Get(), packet);
-
-    VarList::OnSuperMainStartAcceptLogon((ENetPeer*)this, GetItemManager()->GetItemsDatHash());
 }
 void Player::OnDisconnect() {
     Logger::Print(INFO, "A player disconnected with IP {}, connectId {} and {} pings.", this->GetIp(), this->GetConnectId(), this->GetPing());

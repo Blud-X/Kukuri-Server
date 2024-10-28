@@ -38,22 +38,19 @@ void WorldPool::SendToWorldSelect(Player* pPlayer) {
     if (!pPlayer) return;
 
     // Welc msg
-    VarList::OnConsoleMessage((ENetPeer*)pPlayer,
+    VarList::OnConsoleMessage(pPlayer->Get(),
         fmt::format("Welcome {} Where would you like to go?", pPlayer->GetRawName()));
 
     // create World Select Menu with correct format
-    std::string menuText = "default\n";
-    menuText.append("add_filter|0|0|\n");
-    menuText.append("\nadd_spacer|small|\n");
-    menuText.append("add_label|big|`wTop Worlds``|left|\n");
-    menuText.append("\nadd_spacer|small|\n");
-    menuText.append("add_button|START||staticBlueFrame|0|\n");
-    menuText.append("add_button|EXIT||staticBlueFrame|0|\n");
+    std::string menuText = "default|START\n";
+    menuText.append("add_filter\n");
+    menuText.append("add_heading|Top Worlds\n");
+    menuText.append("add_floater|START|0|0.7|655565\n");
 
     // active worlds
     for (const auto& [name, world] : m_worlds) {
         if (world && world->GetPlayerCount() > 0) {
-            menuText += fmt::format("add_button|{}||staticBlueFrame|{}|\n",
+            menuText += fmt::format("add_floater|{}|{}|0.7|655565\n",
                 name,
                 world->GetPlayerCount()
             );
@@ -63,7 +60,7 @@ void WorldPool::SendToWorldSelect(Player* pPlayer) {
     // send World Select Menu
     auto vList = VariantList::Create("OnRequestWorldSelectMenu");
     vList.Insert(menuText);
-    ENetWrapper::SendVariantList((ENetPeer*)pPlayer, vList);
+    ENetWrapper::SendVariantList(pPlayer->Get(), vList);
 
     // Gazette dialog
     DialogBuilder db;
@@ -77,7 +74,7 @@ void WorldPool::SendToWorldSelect(Player* pPlayer) {
 
     auto dialogVList = VariantList::Create("OnDialogRequest", 100);
     dialogVList.Insert(db.Get());
-    ENetWrapper::SendVariantList((ENetPeer*)pPlayer, dialogVList);
+    ENetWrapper::SendVariantList(pPlayer->Get(), dialogVList);
 
     Logger::Print(INFO, "Sent world select menu to player {}", pPlayer->GetRawName());
 }
