@@ -2,7 +2,7 @@
 > A Growtopia Private Server made in C++, well-structured and reliable code.
 
 ### Known Issue
-> After managing to solve the login issue, I need to make a World Selection before sending the Register Dialog.
+> Switching vcpkg to Conan
 
 ### Requirements
 - [vcpkg](https://vcpkg.io/en/)
@@ -12,7 +12,7 @@
 To start build the source, first you'll need to follow this step
 - Firstly, You need to clone the repository:
 ```
-$ git clone --recurse-submodules https://github.com/Kukuri-Dev/Kukuri-Tavern
+$ git clone --recurse-submodules https://github.com/Kukuri-Dev/Kukuri-Server
 ```
 - Second, You'll need to install the requirements package by using this command below:
 ```
@@ -28,7 +28,9 @@ Database that we currently use is SQLite3 (With sqlpp11 lib)
 
 ## Todo
 - [X] Change the Database
-- [ ] Login page
+- [X] Login page
+- [X] Joining the Game
+- [ ] Join world
 - [ ] Caching for holding world offers
 - [ ] Fetch some API from my website
 
